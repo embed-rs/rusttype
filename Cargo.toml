@@ -19,7 +19,7 @@ exclude = ["examples/*.ttf"]
 
 [dependencies]
 arrayvec = "^0.3.13"
-stb_truetype = "^0.2"
+stb_truetype = {git = "https://github.com/phil-opp/stb_truetype-rs.git"}
 
 [dev-dependencies]
 glium = "^0.14"
