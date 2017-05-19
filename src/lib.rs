@@ -88,7 +88,7 @@ extern crate alloc;
 extern crate collections;
 
 extern crate arrayvec;
-extern crate stb_truetype;
+pub extern crate stb_truetype;
 
 mod geometry;
 mod rasterizer;
