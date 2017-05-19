@@ -81,6 +81,16 @@
 //!   known as NFC in the normalisation crate.
 //! * A glyph is a particular font's shape to draw the character for a particular Unicode code point. This will
 //!   have its own identifying number unique to the font, its ID.
+
+#![feature(alloc, collections)]
+#![cfg_attr(not(test), no_std)]
+
+#[cfg(test)]
+extern crate core;
+extern crate alloc;
+#[macro_use]
+extern crate collections;
+
 extern crate arrayvec;
 extern crate stb_truetype;
 extern crate linked_hash_map;
@@ -92,7 +102,9 @@ mod support;
 
 pub mod gpu_cache;
 
-use std::sync::Arc;
+use alloc::arc::Arc;
+use alloc::boxed::Box;
+use collections::Vec;
 
 pub use geometry::{Rect, Point, point, Vector, vector, Line, Curve};
 use stb_truetype as tt;
@@ -115,7 +127,7 @@ pub enum SharedBytes<'a> {
     ByRef(&'a [u8]),
     ByArc(Arc<Box<[u8]>>)
 }
-impl<'a> ::std::ops::Deref for SharedBytes<'a> {
+impl<'a> ::core::ops::Deref for SharedBytes<'a> {
     type Target = [u8];
     fn deref(&self) -> &[u8] {
         match *self {
@@ -425,7 +437,7 @@ impl<'a, I: Iterator> Iterator for GlyphIter<'a, I> where I::Item: Into<Codepoin
 #[derive(Clone)]
 pub struct LayoutIter<'a, 'b> {
     font: &'a Font<'a>,
-    chars: ::std::str::Chars<'b>,
+    chars: ::core::str::Chars<'b>,
     caret: f32,
     scale: Scale,
     start: Point<f32>,
@@ -596,7 +608,7 @@ impl<'a> ScaledGlyph<'a> {
     }
     fn shape_with_offset(&self, offset: Point<f32>) -> Option<Vec<Contour>> {
         use stb_truetype::VertexType;
-        use std::mem::replace;
+        use core::mem::replace;
         match self.g.inner {
             GlyphInner::Proxy(font, id) => font.info.get_glyph_shape(id),
             GlyphInner::Shared(ref data) => data.shape.clone()

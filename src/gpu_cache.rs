@@ -25,7 +25,7 @@
 
 use ::{PositionedGlyph, GlyphId, Rect, Scale, Vector};
 
-use std::collections::HashMap;
+use collections::{Vec};
 use support::bst::map::BTreeMap;
 use support::bst::Bound::{Included, Unbounded};
 use linked_hash_map::LinkedHashMap;
@@ -38,10 +38,10 @@ struct PGlyphSpec {
     offset: Vector<f32>
 }
 
-impl ::std::cmp::Eq for PGlyphSpec {}
+impl ::core::cmp::Eq for PGlyphSpec {}
 
-impl ::std::cmp::Ord for PGlyphSpec {
-    fn cmp(&self, other: &PGlyphSpec) -> ::std::cmp::Ordering {
+impl ::core::cmp::Ord for PGlyphSpec {
+    fn cmp(&self, other: &PGlyphSpec) -> ::core::cmp::Ordering {
         self.partial_cmp(other).unwrap()
     }
 }
@@ -77,7 +77,7 @@ impl ByteArray2d {
     }
 }
 
-impl ::std::ops::Index<(usize, usize)> for ByteArray2d {
+impl ::core::ops::Index<(usize, usize)> for ByteArray2d {
     type Output = u8;
 
     fn index(&self, (row, col): (usize, usize)) -> &u8 {
@@ -85,7 +85,7 @@ impl ::std::ops::Index<(usize, usize)> for ByteArray2d {
     }
 }
 
-impl ::std::ops::IndexMut<(usize, usize)> for ByteArray2d {
+impl ::core::ops::IndexMut<(usize, usize)> for ByteArray2d {
     fn index_mut(&mut self, (row, col): (usize, usize)) -> &mut u8 {
         let vec_index = self.get_vec_index(row, col);
         &mut self.inner_array[vec_index]
@@ -105,8 +105,8 @@ pub struct Cache {
     width: u32,
     height: u32,
     rows: LinkedHashMap<u32, Row>,
-    space_start_for_end: HashMap<u32, u32>,
-    space_end_for_start: HashMap<u32, u32>,
+    space_start_for_end: BTreeMap<u32, u32>,
+    space_end_for_start: BTreeMap<u32, u32>,
     queue: Vec<(usize, PositionedGlyph<'static>)>,
     queue_retry: bool,
     all_glyphs: BTreeMap<PGlyphSpec, (u32, u32)>
@@ -174,8 +174,8 @@ impl Cache {
             width: width,
             height: height,
             rows: LinkedHashMap::new(),
-            space_start_for_end: {let mut m = HashMap::new(); m.insert(height, 0); m},
-            space_end_for_start: {let mut m = HashMap::new(); m.insert(0, height); m},
+            space_start_for_end: {let mut m = BTreeMap::new(); m.insert(height, 0); m},
+            space_end_for_start: {let mut m = BTreeMap::new(); m.insert(0, height); m},
             queue: Vec::new(),
             queue_retry: false,
             all_glyphs: BTreeMap::new()

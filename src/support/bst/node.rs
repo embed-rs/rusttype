@@ -31,13 +31,13 @@
 // Since Rust doesn't actually have dependent types and polymorphic recursion,
 // we make do with lots of unsafety.
 
-use ::std::marker::PhantomData;
-use ::std::mem;
-use ::std::ptr::{self};
-use ::std::slice;
+use core::marker::PhantomData;
+use core::mem;
+use core::ptr::{self};
+use core::slice;
 use super::NonZero;
 use super::Unique;
-use ::std::boxed::Box;
+use alloc::boxed::Box;
 use super::heap;
 
 const B: usize = 6;
@@ -1094,7 +1094,7 @@ pub enum InsertResult<'a, K, V, Type> {
 }
 
 pub mod marker {
-    use ::std::marker::PhantomData;
+    use core::marker::PhantomData;
 
     pub enum Leaf { }
     pub enum Internal { }

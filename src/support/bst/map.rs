@@ -8,15 +8,15 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use ::std::cmp::Ordering;
-use ::std::fmt::Debug;
-use ::std::hash::{Hash, Hasher};
-use ::std::iter::FromIterator;
-use ::std::marker::PhantomData;
-use ::std::ops::Index;
-use ::std::{fmt, mem, ptr};
+use core::cmp::Ordering;
+use core::fmt::Debug;
+use core::hash::{Hash, Hasher};
+use core::iter::FromIterator;
+use core::marker::PhantomData;
+use core::ops::Index;
+use core::{fmt, mem, ptr};
 
-use ::std::borrow::Borrow;
+use core::borrow::Borrow;
 use super::Bound::{self, Included, Excluded, Unbounded};
 
 use super::node::{self, NodeRef, Handle, marker};

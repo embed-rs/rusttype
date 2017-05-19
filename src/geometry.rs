@@ -1,4 +1,4 @@
-use std::ops;
+use core::ops;
 
 /// A point in 2-dimensional space, with each dimension of type `N`.
 ///

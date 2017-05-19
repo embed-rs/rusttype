@@ -11,14 +11,14 @@
 // This is pretty much entirely stolen from TreeSet, since BTreeMap has an identical interface
 // to TreeMap
 
-use ::std::cmp::Ordering::{self, Less, Greater, Equal};
-use ::std::cmp::{min, max};
-use ::std::fmt::Debug;
-use ::std::fmt;
-use ::std::iter::{Peekable, FromIterator};
-use ::std::ops::{BitOr, BitAnd, BitXor, Sub};
+use core::cmp::Ordering::{self, Less, Greater, Equal};
+use core::cmp::{min, max};
+use core::fmt::Debug;
+use core::fmt;
+use core::iter::{Peekable, FromIterator};
+use core::ops::{BitOr, BitAnd, BitXor, Sub};
 
-use ::std::borrow::Borrow;
+use core::borrow::Borrow;
 use super::map::{BTreeMap, Keys};
 use super::Recover;
 use super::Bound;

@@ -8,9 +8,9 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use ::std::cmp::Ordering;
+use core::cmp::Ordering;
 
-use ::std::borrow::Borrow;
+use core::borrow::Borrow;
 
 use super::node::{Handle, NodeRef, marker};
 

@@ -1,3 +1,4 @@
+use collections::Vec;
 use ::geometry::*;
 use arrayvec;
 trait SliceUp: Sized {
@@ -7,7 +8,7 @@ trait SliceUp: Sized {
     fn slice_up_y(&self, planes: PlaneSet) -> Self::Out;
 }
 
-type LineIter = ::std::option::IntoIter<Line>;
+type LineIter = ::core::option::IntoIter<Line>;
 
 #[derive(Debug)]
 struct LineSliceIter {
@@ -37,7 +38,7 @@ impl Iterator for LineSliceIter {
         lower_t = lower_t.max(0.0).min(1.0);
         upper_t = upper_t.max(0.0).min(1.0);
         if self.m < 0.0 {
-            ::std::mem::swap(&mut lower_t, &mut upper_t);
+            ::core::mem::swap(&mut lower_t, &mut upper_t);
         }
         self.i += 1;
         if lower_t != upper_t {
@@ -194,15 +195,15 @@ impl SliceUp for Curve {
 pub fn rasterize<O: FnMut(u32, u32, f32)>(lines: &[Line], curves: &[Curve],
                                           width: u32, height: u32,
                                           mut output: O) {
-    use ::std::collections::HashMap;
+    use collections::BTreeMap;
     let mut lines: Vec<_> = lines.iter().map(|&l| (l, l.bounding_box())).collect();
     lines[..].sort_by(|&(_, ref a), &(_, ref b)| a.min.y.partial_cmp(&b.min.y).unwrap());
     let mut curves: Vec<_> = curves.iter().map(|&c| (c, c.bounding_box())).collect();
     curves[..].sort_by(|&(_, ref a), &(_, ref b)| a.min.y.partial_cmp(&b.min.y).unwrap());
     let mut y = 0;
     let mut next_line = 0; let mut next_curve = 0;
-    let mut active_lines_y  = HashMap::new(); let mut active_curves_y = HashMap::new();
-    let mut active_lines_x  = HashMap::new(); let mut active_curves_x = HashMap::new();
+    let mut active_lines_y  = BTreeMap::new(); let mut active_curves_y = BTreeMap::new();
+    let mut active_lines_x  = BTreeMap::new(); let mut active_curves_x = BTreeMap::new();
     let mut scanline_lines = Vec::new();
     let mut lines_to_remove = Vec::new();
     let mut scanline_curves = Vec::new();

@@ -9,10 +9,10 @@
 // except according to those terms.
 #![allow(unused)]
 
-use ::std::marker::{PhantomData};
-use ::std::ops::{Deref};
-use ::std::mem;
-use ::std::fmt;
+use core::marker::{PhantomData};
+use core::ops::{Deref};
+use core::mem;
+use core::fmt;
 
 mod node;
 mod search;
@@ -101,7 +101,7 @@ impl<T> NonZero<T> {
     }
 }
 
-impl<T> ::std::ops::Deref for NonZero<T> {
+impl<T> ::core::ops::Deref for NonZero<T> {
     type Target = T;
 
     #[inline]
