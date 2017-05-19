@@ -1,6 +1,8 @@
 use collections::Vec;
 use ::geometry::*;
 use arrayvec;
+use stb_truetype::float_impls::FloatImpls;
+
 trait SliceUp: Sized {
     type PerSlice: Iterator<Item=Self>;
     type Out: Iterator<Item=Self::PerSlice>;

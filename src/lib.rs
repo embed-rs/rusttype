@@ -101,6 +101,7 @@ use collections::Vec;
 
 pub use geometry::{Rect, Point, point, Vector, vector, Line, Curve};
 use stb_truetype as tt;
+use stb_truetype::float_impls::FloatImpls;
 
 /// A collection of fonts read straight from a font file's data. The data in the collection is not validated.
 /// This structure may or may not own the font data.

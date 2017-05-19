@@ -1,4 +1,5 @@
 use core::ops;
+use stb_truetype::float_impls::FloatImpls;
 
 /// A point in 2-dimensional space, with each dimension of type `N`.
 ///
