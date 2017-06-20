@@ -79,13 +79,12 @@
 //! * A glyph is a particular font's shape to draw the character for a particular Unicode code point. This will
 //!   have its own identifying number unique to the font, its ID.
 
-#![feature(alloc, collections)]
+#![feature(alloc)]
 #![cfg_attr(not(test), no_std)]
 
 #[cfg(test)]
 extern crate core;
 extern crate alloc;
-extern crate collections;
 
 extern crate arrayvec;
 pub extern crate stb_truetype;
@@ -97,7 +96,7 @@ mod support;
 
 use alloc::arc::Arc;
 use alloc::boxed::Box;
-use collections::Vec;
+use alloc::Vec;
 
 pub use geometry::{Rect, Point, point, Vector, vector, Line, Curve};
 use stb_truetype as tt;

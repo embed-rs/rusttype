@@ -1,4 +1,4 @@
-use collections::Vec;
+use alloc::Vec;
 use ::geometry::*;
 use arrayvec;
 use stb_truetype::float_impls::FloatImpls;
@@ -197,7 +197,7 @@ impl SliceUp for Curve {
 pub fn rasterize<O: FnMut(u32, u32, f32)>(lines: &[Line], curves: &[Curve],
                                           width: u32, height: u32,
                                           mut output: O) {
-    use collections::BTreeMap;
+    use alloc::BTreeMap;
     let mut lines: Vec<_> = lines.iter().map(|&l| (l, l.bounding_box())).collect();
     lines[..].sort_by(|&(_, ref a), &(_, ref b)| a.min.y.partial_cmp(&b.min.y).unwrap());
     let mut curves: Vec<_> = curves.iter().map(|&c| (c, c.bounding_box())).collect();
